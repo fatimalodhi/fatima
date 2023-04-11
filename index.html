@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- question no 1 -->
+  <button onclick="addNumber()">Question NO 1</button>
+  <p id="result"></p>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <!-- question no 2 -->
+  <form id="my-form">
+    <label for="input-name">Name:</label>
+    <input type="text" id="input-name" name="name">
+    <button type="submit" id="submit-btn">Submit</button>
+  </form>
+  <p id="resolve"></p>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <!-- question no 3 -->
+  <h1>Example adding paragraph element</h1>
+  <div id="container">
+    <p>Existing paragraph element 1</p>
+    <p>Existing paragraph element 2</p>
+  </div>
+  <button onclick="addParagraph()">Add Paragraph</button>
+  <br>
+  <br>
+  <br>
+  <br>
+  <!-- question no 4 -->
+  <h1>Example adding list item</h1>
+  <ul id="list">
+    <li>Existing list item 1</li>
+    <li>Existing list item 2</li>
+  </ul>
+  <button onclick="addListItem()">Add List Item</button>
+  <br>
+  <br>
+  <br>
+  <br>
+   <!-- question no 5 -->
+   <div id="myDiv" style="width: 200px; height: 200px; background-color: blue;"></div>
+   <br>
+   <button onclick="changeColor()">Change Color</button>
+   <br>
+   <br>
+   <br>
+   <br>
+   <!-- question no 6-->
+   <form id="my-form">
+    <label for="name-input">Name:</label>
+    <input type="text" id="name-input">
+    <label for="age-input">Age:</label>
+    <input type="number" id="age-input">
+    <button type="button" onclick="saveToLocalStorage()">Save to LocalStorage</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <br>
+  <!-- question no 7-->
+  <button onclick="getObject()">Get Object</button>
+  <div id="result"></div>
+
+  <!-- javascript start -->
+  <script type="text/javascript">
+    // question no 1 js
+    function addNumberClosure(number) {
+      return function(num) {
+        return num + number;
+      };
+    }
+
+    const add5 = addNumberClosure(5);
+
+    function addNumber() {
+      const input = parseInt(prompt("Enter a number:"));
+      const result = add5(input);
+      document.getElementById("result").textContent = `Result: ${result}`;
+    } 
+
+    // question no 2 js
+    const form = document.getElementById("my-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const resolve = document.getElementById("resolve");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); 
+      const nameInput = document.getElementById("input-name");
+      const name = nameInput.value;
+      resolve.textContent = `Hello, ${name}!`; 
+      form.reset(); 
+    });
+
+    // question no 3 js
+    function addParagraph() {
+      const text = prompt("Enter paragraph text:");
+      const container = document.getElementById("container");
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      container.appendChild(paragraph);
+    }
+
+    // question no 4 js   
+    function addListItem() {
+      const text = prompt("Enter list item text:");
+      const list = document.getElementById("list");
+      const listItem = document.createElement("li");
+      listItem.textContent = text;
+      list.appendChild(listItem);
+    }
+
+    // question no 5 js   
+    function changeColor() {
+      const myDiv = document.getElementById("myDiv");
+      const newColor = "red";
+      myDiv.style.backgroundColor = newColor;
+    }
+
+    // question no 6 js  
+    function saveObjectToLocalStorage(key, object) {
+  localStorage.setItem(key, JSON.stringify(object));
+}
+
+function saveToLocalStorage() {
+  const nameInput = document.getElementById('name-input');
+  const ageInput = document.getElementById('age-input');
+
+  const person = {
+    name: nameInput.value,
+    age: ageInput.value
+  };
+
+  saveObjectToLocalStorage('person', person);
+
+  nameInput.value = '';
+  ageInput.value = '';
+}
+    // question no 7 js 
+    function getObject() {
+      const storedObject = JSON.parse(localStorage.getItem('myObjectKey'));
+      document.getElementById('result').textContent = JSON.stringify(storedObject);
+    }
+ 
+  </script>
+  <!-- javascript end -->
+</body>
+</html>
